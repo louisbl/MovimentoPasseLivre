@@ -1,0 +1,55 @@
+{
+  "type": "com.pentaped.turbobrazil.core.GameAssets",
+  "data": {
+    "sprites_folder": "assets/sprites",
+    "main_gpusprites": [
+      {
+        "container": "GROUND",
+        "png": "assets/sprites/sol.png",
+        "config": "assets/sprites/sol.xml",
+        "behaviors": [
+          {
+            "name": "anim-bon",
+            "type": "HIGH",
+            "loop": true
+          },
+          {
+            "name": "anim-moyen",
+            "type": "MEDIUM",
+            "loop": true
+          },
+          {
+            "name": "trans-bon-moyen",
+            "type": "HIGH_TO_MEDIUM",
+            "loop": false
+          },
+          {
+            "name": "anim-mauvais-via-bon",
+            "type": "HIGH_TO_LOW",
+            "loop": false
+          },
+          {
+            "name": "trans-moyen-bon",
+            "type": "MEDIUM_TO_HIGH",
+            "loop": false
+          },
+          {
+            "name": "anim-mauvais-via-moyen",
+            "type": "MEDIUM_TO_LOW",
+            "loop": false
+          },
+          {
+            "name": "trans-mauvais-bon",
+            "type": "LOW_TO_HIGH",
+            "loop": false
+          },
+          {
+            "name": "trans-mauvais-moyen",
+            "type": "LOW_TO_MEDIUM",
+            "loop": false
+          }
+        ]
+      }
+    ]
+  }
+}
