@@ -12,6 +12,8 @@ import com.pentaped.turbobrazil.components.Position2D;
 import com.pentaped.turbobrazil.components.CustomWaypoint;
 import com.pentaped.turbobrazil.components.TargetPlace;
 import flash.display.Bitmap;
+import flash.events.TouchEvent;
+import flash.Lib;
 import openfl.Assets;
 
 class MainCharSys extends ListIteratingSystem<MainCharNode> {
@@ -21,6 +23,9 @@ class MainCharSys extends ListIteratingSystem<MainCharNode> {
 
 	public function new( ) {
 		super( MainCharNode, _updateNode, _onNodeAdded );
+		Lib.current.stage.addEventListener( TouchEvent.TOUCH_BEGIN, _onTap );
+		Lib.current.stage.addEventListener( TouchEvent.TOUCH_MOVE, _onTap );
+		Lib.current.stage.addEventListener( TouchEvent.TOUCH_END, _onTap );
 	}
 
 	function _updateNode( node : MainCharNode, delta_time : Float ) : Void {
@@ -33,4 +38,9 @@ class MainCharSys extends ListIteratingSystem<MainCharNode> {
 		node.entity.add( new TargetPlace( ) );
 		trace( '${node.loops.current}' );
 	}
+
+	function _onTap( event : TouchEvent ) {
+		trace( 'event:$event' );
+	}
+
 }

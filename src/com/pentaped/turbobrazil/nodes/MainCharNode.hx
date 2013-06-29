@@ -6,8 +6,10 @@ import com.pentaped.turbobrazil.components.*;
 
 class MainCharNode extends Node<MainCharNode> {
 
-	public var sprite	: SpriteAnimation;
-	public var main  	: MainChar;
 	public var loops 	: Loops;
+	public var sprite	: SpriteAnimation;
+	public var gpu   	: GPUAnimation;
+
+	public var main	: MainChar;
 
 }

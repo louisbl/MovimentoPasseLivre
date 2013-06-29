@@ -101,7 +101,14 @@ class God {
 			graph.addMutualArc(source, target, 1);
 		}
 
-		map.addChild( new Bitmap( Assets.getBitmapData( "assets/export_ville.png" ) ) );
+		for( i in 0...6 ) {
+			var bmp = new Bitmap( Assets.getBitmapData( "assets/0"+(i+1)+".png" ) );
+			bmp.x = (i%3)*2048;
+			if( i >= 3 ) {
+				bmp.y = 2048;
+			}
+			map.addChild( bmp );
+		}
 		container.addChild( map );
 	}
 

@@ -18,8 +18,8 @@ class Main extends Sprite {
 
 		#if ( cpp && debug )
 			addChild( new Stats() );
-			#if debugger
 				new hxcpp.DebugStdio(false);
+			#if debugger
 			#end
 		#end
 

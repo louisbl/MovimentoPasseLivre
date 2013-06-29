@@ -27,7 +27,7 @@ class PeopleSys extends ListIteratingSystem<PeopleNode> {
 	}
 
   function _onNodeAdded( node : PeopleNode ) {
-		trace( '_onNodeAdded:$node' );
+		trace( '_onNodeAdded:${node.sprite}' );
 		node.sprite.sprite.addChild( new Bitmap( Assets.getBitmapData( "assets/neutre.png" ) ) );
 		node.loops.elements.push( data.people_loops[ Std.random( data.people_loops.length ) ] );
 		node.entity.add( new TargetPlace( ) );
