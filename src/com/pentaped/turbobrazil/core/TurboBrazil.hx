@@ -93,8 +93,11 @@ class TurboBrazil {
 	function _prepareSystems( ) : Void {
 		_loadSystem( UserInputSys,	0 );
 
-		_loadSystem( MainCharTargetSys,  	1 );
-		_loadSystem( MainCharPositionSys,	2 );
+		_loadSystem( MainCharSys,    	1 );
+		_loadSystem( PeopleSys,      	1 );
+		_loadSystem( DemonstratorSys,	1 );
+		_loadSystem( TargetSys,      	2 );
+		_loadSystem( PositionSys,    	5 );
 
 		_loadSystem( GPUAnimSys,   	20 );
 		_loadSystem( SpriteAnimSys,	30 );

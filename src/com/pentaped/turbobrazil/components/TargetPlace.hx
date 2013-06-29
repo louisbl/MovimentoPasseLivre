@@ -1,20 +1,14 @@
 package com.pentaped.turbobrazil.components;
 
-class TargetPlace {
+import haxe.ds.GenericStack;
 
-	public var targets             	: Array<Position2D>;
-	public var index               	: Int;
-	public var arrived             	: Bool;
-	public var current( get, null )	: Position2D;
+class TargetPlace extends LoopList<Position2D> {
+
+	public var arrived	: Bool;
 
 	public function new( ) {
-		targets	= new Array<Position2D>( );
-		index  	= -1;
+		super( );
 		arrived	= true;
-	}
-
-	function get_current( ) : Position2D {
-		return targets[ index ];
 	}
 
 }

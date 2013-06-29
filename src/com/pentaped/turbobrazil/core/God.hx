@@ -47,9 +47,35 @@ class God {
 
 	}
 
+	public function createPeople( ) {
+		var people = _createBaseEntity( )
+			.add( new People( ) );
+		engine.addEntity( people );
+	}
+
+	public function createDemonstrator( ) {
+		var demo = _createBaseEntity( )
+			.add( new Demonstrator( ) );
+		engine.addEntity( demo );
+	}
+
 	public function createGame( ) {
 		_createMap( );
 		_createMainChar( );
+		_createPeoples( );
+		_createDemonstrators( );
+	}
+
+	function _createPeoples( ) {
+		for (i in 0...6) {
+			createPeople( );
+		}
+	}
+
+	function _createDemonstrators( ) {
+		for (i in 0...6) {
+			createDemonstrator( );
+		}
 	}
 
 	function _createMap( ) {
@@ -80,19 +106,21 @@ class God {
 	}
 
 	function _createMainChar( ) {
+		var main_char = _createBaseEntity( )
+			.add( new MainChar( ) );
+		engine.addEntity( main_char );
+	}
+
+	function _createBaseEntity( ) {
 		var sp = new Sprite( );
-		sp.addChild( new Bitmap( Assets.getBitmapData( "assets/epic_pentaped.png" ) ) );
 		var spa = new SpriteAnimation( );
 		spa.sprite = sp;
-		var main_char = new Entity( "main_char" )
+		return new Entity( )
 			.add( new Position2D( ) )
 			.add( new Scale2D( ) )
 			.add( spa )
-			.add( new MainChar( ) )
-			.add( new TargetPlace( ) )
+			.add( new Loops( ) )
 			.add( new GPUAnimation( ) );
-
-		engine.addEntity( main_char );
 	}
 
 }

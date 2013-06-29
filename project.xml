@@ -13,4 +13,6 @@
 
 	<assets path="assets" rename="assets" exclude="nme.svg" />
 	<icon path="assets/nme.svg" />
+
+
 </project>

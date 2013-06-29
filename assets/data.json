@@ -33,7 +33,15 @@
         "length": 0
       }
     ],
-    "loops": [
+    "people_loops": [
+      [
+        0,
+        1,
+        2,
+        3
+      ]
+    ],
+    "main_loops": [
       [
         0,
         1,

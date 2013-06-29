@@ -4,10 +4,10 @@ import ash.core.Node;
 
 import com.pentaped.turbobrazil.components.*;
 
-class MainCharNode extends Node<MainCharNode> {
+class PeopleNode extends Node<PeopleNode> {
 
-	public var sprite	: SpriteAnimation;
-	public var main  	: MainChar;
+	public var sprite : SpriteAnimation;
+	public var people	: People;
 	public var loops 	: Loops;
 
 }
