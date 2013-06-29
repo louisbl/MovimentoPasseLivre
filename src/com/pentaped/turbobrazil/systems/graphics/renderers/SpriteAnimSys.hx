@@ -7,8 +7,8 @@ import flash.display.Sprite;
 
 class SpriteAnimSys extends ListIteratingSystem<SpriteAnimNode> {
 
-	@inject( 'container' )
-	public var container : Sprite;
+	@inject( 'map_sprite' )
+	public var map : Sprite;
 
 	public function new( ) {
 		super( SpriteAnimNode, _updateNode, _onNodeAdded );
@@ -24,7 +24,7 @@ class SpriteAnimSys extends ListIteratingSystem<SpriteAnimNode> {
 	}
 
 	function _onNodeAdded( node : SpriteAnimNode ) : Void {
-		container.addChild( node.anim.sprite );
+		map.addChild( node.anim.sprite );
 	}
 
 }

@@ -1,0 +1,45 @@
+{
+  "type": "com.pentaped.turbobrazil.core.GameData",
+  "data": {
+    "arcs": [
+      0,
+      1,
+      2,
+      1,
+      2,
+      3,
+      3,
+      0
+    ],
+    "map_id": [
+      {
+        "y": 599,
+        "x": 562,
+        "length": 0
+      },
+      {
+        "y": 629,
+        "x": 672,
+        "length": 0
+      },
+      {
+        "y": 413,
+        "x": 724,
+        "length": 0
+      },
+      {
+        "y": 385,
+        "x": 618,
+        "length": 0
+      }
+    ],
+    "loops": [
+      [
+        0,
+        1,
+        2,
+        3
+      ]
+    ]
+  }
+}

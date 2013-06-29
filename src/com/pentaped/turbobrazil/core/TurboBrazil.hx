@@ -1,5 +1,6 @@
 package com.pentaped.turbobrazil.core;
 
+import de.polygonal.ai.pathfinding.AStar;
 import minject.Injector;
 
 import ash.core.Engine;
@@ -11,7 +12,10 @@ import ash.tick.FixedTickProvider;
 import flash.display.Sprite;
 import openfl.Assets;
 
+import de.polygonal.ai.pathfinding.AStarWaypoint;
+import de.polygonal.ds.Graph;
 import de.polygonal.ds.Array2;
+import de.polygonal.ds.DA;
 
 import me.beltramo.bbq.JsonType;
 
@@ -19,6 +23,7 @@ import com.pentaped.turbobrazil.systems.inputs.*;
 import com.pentaped.turbobrazil.systems.physics.*;
 import com.pentaped.turbobrazil.systems.graphics.elements.*;
 import com.pentaped.turbobrazil.systems.graphics.renderers.*;
+import com.pentaped.turbobrazil.components.*;
 
 class TurboBrazil {
 
@@ -55,19 +60,27 @@ class TurboBrazil {
 
 		var assets_json	= Assets.getText( "assets/assets.json" );
 		var config_json	= Assets.getText( "assets/config.json" );
+		var data_json  	= Assets.getText( "assets/data.json" );
 
 		_game_assets	= JsonType.create( assets_json );
 		var config  	= JsonType.create( config_json );
+		var data    	= JsonType.create( data_json );
 
-		var map_id = new Array2<Int>( config.map_width, config.map_height );
+		var map      	= new Sprite( );
+		var graph    	= new Graph<AStarWaypoint>( );
+		var astar    	= new AStar( graph );
+		var waypoints	= new DA<CustomWaypoint>( );
 
-		_injector.mapValue( Array2, map_id, 'map_id' );
+		_injector.mapValue( DA, waypoints, 'map_waypoints' );
+		_injector.mapValue( AStar, astar, 'map_astar' );
+		_injector.mapValue( Graph, graph, 'map_graph' );
 		_injector.mapValue( Sprite, _container, 'container' );
+		_injector.mapValue( Sprite, map, 'map_sprite' );
 		_injector.mapValue( Engine, _engine );
 		_injector.mapValue( God, _god );
 		_injector.mapValue( GameAssets, _game_assets );
 		_injector.mapValue( GameConfig, config );
-
+		_injector.mapValue( GameData, data );
 
 		_injector.injectInto( _god );
 
@@ -80,10 +93,12 @@ class TurboBrazil {
 	function _prepareSystems( ) : Void {
 		_loadSystem( UserInputSys,	0 );
 
-		_loadSystem( MainCharPositionSys,	1 );
+		_loadSystem( MainCharTargetSys,  	1 );
+		_loadSystem( MainCharPositionSys,	2 );
 
-		_loadSystem( GPUAnimSys,   	2 );
-		_loadSystem( SpriteAnimSys,	3 );
+		_loadSystem( GPUAnimSys,   	20 );
+		_loadSystem( SpriteAnimSys,	30 );
+		_loadSystem( MapAnimSys,   	40 );
 	}
 
 	function _loadSystem( sys_class : Class<System>, prio : Int ) : Void{

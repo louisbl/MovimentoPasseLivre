@@ -3,12 +3,14 @@
 
 	<meta title="Turbobrazil" package="com.pentaped.turbobrazil" version="1.0.0" company="Epic Pentaped" />
 	<app main="Main" path="bin-debug" file="Turbobrazil" />
+	<window background="0x000000" />
 
 	<source path="src" />
 	<source path="libs/src" />
 
 	<haxelib name="openfl" />
+	<haxelib name="actuate" />
 
 	<assets path="assets" rename="assets" exclude="nme.svg" />
-	<icon path="Assets/nme.svg" />
+	<icon path="assets/nme.svg" />
 </project>

@@ -1,6 +1,7 @@
 import flash.display.Sprite;
 
 import com.pentaped.turbobrazil.core.TurboBrazil;
+import me.beltramo.bbq.Stats;
 
 class Main extends Sprite {
 
@@ -17,15 +18,9 @@ class Main extends Sprite {
 
 		#if ( cpp && debug )
 			addChild( new Stats() );
-			turbo.onStarted.addOnce( function( ) {
-				trace( 'started !' );
-				cpp.vm.Profiler.start("log.txt");
-
-				#if debugger
-					new hxcpp.DebugStdio(false);
-				#end
-
-			} );
+			#if debugger
+				new hxcpp.DebugStdio(false);
+			#end
 		#end
 
 		turbo.start( );
