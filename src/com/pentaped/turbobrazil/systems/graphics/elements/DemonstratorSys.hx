@@ -10,6 +10,7 @@ import com.pentaped.turbobrazil.core.GameData;
 import com.pentaped.turbobrazil.nodes.DemonstratorNode;
 import com.pentaped.turbobrazil.components.*;
 import flash.display.Bitmap;
+import flash.display.Sprite;
 import openfl.Assets;
 
 class DemonstratorSys extends ListIteratingSystem<DemonstratorNode> {
@@ -18,7 +19,7 @@ class DemonstratorSys extends ListIteratingSystem<DemonstratorNode> {
 	public var data : GameData;
 
 	public function new( ) {
-		super( DemonstratorNode, _updateNode, _onNodeAdded );
+		super( DemonstratorNode, _updateNode, _onNodeAdded, _onNodeRemoved );
 	}
 
 	function _updateNode( node : DemonstratorNode, delta_time : Float ) : Void {
@@ -30,4 +31,11 @@ class DemonstratorSys extends ListIteratingSystem<DemonstratorNode> {
 		node.loops.elements.push( data.foule_loops[ Std.random( data.foule_loops.length ) ] );
 		node.entity.add( new TargetPlace( ) );
 	}
+
+	function _onNodeRemoved( node : DemonstratorNode ) {
+		while( node.sprite.sprite.numChildren > 0 ) {
+			node.sprite.sprite.removeChildAt( 0 );
+		}
+	}
+
 }

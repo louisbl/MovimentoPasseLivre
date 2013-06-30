@@ -70,6 +70,7 @@ class TurboBrazil {
 		var graph    	= new Graph<AStarWaypoint>( );
 		var astar    	= new AStar( graph );
 		var waypoints	= new DA<CustomWaypoint>( );
+		var session  	= new GameSession( );
 
 		_injector.mapValue( DA, waypoints, 'map_waypoints' );
 		_injector.mapValue( AStar, astar, 'map_astar' );
@@ -81,6 +82,7 @@ class TurboBrazil {
 		_injector.mapValue( GameAssets, _game_assets );
 		_injector.mapValue( GameConfig, config );
 		_injector.mapValue( GameData, data );
+		_injector.mapValue( GameSession, session );
 
 		_injector.injectInto( _god );
 
