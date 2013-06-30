@@ -127,6 +127,7 @@ class God {
 			.add( new Scale2D( ) )
 			.add( spa )
 			.add( new Loops( ) )
+			.add( new TargetPlace( ) )
 			.add( new GPUAnimation( ) );
 	}
 

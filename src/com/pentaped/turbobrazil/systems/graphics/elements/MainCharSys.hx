@@ -41,7 +41,7 @@ class MainCharSys extends ListIteratingSystem<MainCharNode> {
 	}
 
 	function _updateNode( node : MainCharNode, delta_time : Float ) : Void {
-		if( )
+		// if( )
 	}
 
   function _onNodeAdded( node : MainCharNode ) {

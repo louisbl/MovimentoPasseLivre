@@ -5,6 +5,7 @@ import com.pentaped.turbobrazil.components.*;
 
 class PeopleNode extends Node<PeopleNode> {
 
+	public var place 	: TargetPlace;
 	public var loops 	: Loops;
 	public var sprite	: SpriteAnimation;
 	public var gpu   	: GPUAnimation;

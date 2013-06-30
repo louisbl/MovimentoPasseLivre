@@ -27,9 +27,13 @@ class DemonstratorSys extends ListIteratingSystem<DemonstratorNode> {
 
   function _onNodeAdded( node : DemonstratorNode ) {
 		trace( '_onNodeAdded:$node' );
+
 		node.sprite.sprite.addChild( new Bitmap( Assets.getBitmapData( "assets/foule.png" ) ) );
-		node.loops.elements.push( data.foule_loops[ Std.random( data.foule_loops.length ) ] );
-		node.entity.add( new TargetPlace( ) );
+
+		node.loops.elements = [];
+		trace( '${node.loops.elements}');
+		node.loops.elements.push( data.foule_loops );
+		node.place.reset = true;
 	}
 
 	function _onNodeRemoved( node : DemonstratorNode ) {

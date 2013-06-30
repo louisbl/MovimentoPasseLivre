@@ -34,10 +34,15 @@ class PeopleSys extends ListIteratingSystem<PeopleNode> {
 
   function _onNodeAdded( node : PeopleNode ) {
 		trace( '_onNodeAdded:${node.sprite}' );
+
 		node.sprite.sprite.addChild( new Bitmap( Assets.getBitmapData( "assets/neutre.png" ) ) );
+
+		node.loops.elements = [];
 		node.loops.elements.push( data.people_loops[ Std.random( data.people_loops.length ) ] );
-		node.entity.add( new TargetPlace( ) );
+		node.place.reset = true;
+
 		node.entity.add( new RoxGestureAgent( node.sprite.sprite ) );
+
 		#if mobile
 		node.sprite.sprite.addEventListener( RoxGestureEvent.GESTURE_TAP, _onLongPress );
 		#else
@@ -49,7 +54,6 @@ class PeopleSys extends ListIteratingSystem<PeopleNode> {
 	function _onNodeRemoved( node : PeopleNode ) {
 		trace( 'node:$node' );
 		node.entity.remove( RoxGestureAgent );
-		node.sprite.sprite.removeEventListener( RoxGestureEvent.GESTURE_TAP, _onLongPress );
 			node.sprite.sprite.removeChildAt( 0 );
 		// while( node.sprite.sprite.numChildren > 0 ) {
 		// }
@@ -57,6 +61,7 @@ class PeopleSys extends ListIteratingSystem<PeopleNode> {
 	}
 
 	function _onLongPress( event : Event ) {
+		event.target.removeEventListener( RoxGestureEvent.GESTURE_TAP, _onLongPress );
 		trace( 'event:$event' );
 		var node = _node_sprites.get( event.target );
 		node.entity.add( new Demonstrator( ) );
