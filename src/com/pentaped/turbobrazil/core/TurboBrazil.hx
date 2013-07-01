@@ -41,6 +41,7 @@ class TurboBrazil {
 		_load( );
 		_prepareSystems( );
 		_god.createGame( );
+		// Assets.getSound( "audio/LoopInGame.wav" ).play( 0, 99999999 );
 	}
 
 	public function start( ) : Void {
@@ -62,6 +63,8 @@ class TurboBrazil {
 		var config_json	= Assets.getText( "assets/config.json" );
 		var data_json  	= Assets.getText( "assets/data.json" );
 
+		// _game_assets = new GameAssets( );
+		// var config = new GameConfig( );
 		_game_assets	= JsonType.create( assets_json );
 		var config  	= JsonType.create( config_json );
 		var data    	= JsonType.create( data_json );

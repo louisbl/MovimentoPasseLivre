@@ -19,6 +19,28 @@ class GameAssets {
 	var bitmaps_existing   	: Map<String,BitmapData>;
 	var gpusprites_existing	: Map<SpriteDataGPU,SpriteAssetGPU>;
 
+
+	var _tile_layer : TileLayer;
+
+	public function new( ) {
+
+	}
+
+	public function getTileLayer( ) : TileLayer {
+		if( _tile_layer == null ) {
+			// sprite sheet
+			var sheetData = Assets.getText("assets/sprites.xml");
+			var tilesheet = new SparrowTilesheet(Assets.getBitmapData("assets/sprites.png"), sheetData);
+
+			// tile-layer
+			_tile_layer = new TileLayer(tilesheet);
+			_tile_layer.view.mouseEnabled = false;
+			_tile_layer.view.mouseChildren = false;
+		}
+		return _tile_layer;
+	}
+
+
 	public function createBitmaps( ) : Void {
 		gpusprites_existing	= new Map<SpriteDataGPU,SpriteAssetGPU>( );
 		bitmaps_existing   	= new Map<String,BitmapData>( );

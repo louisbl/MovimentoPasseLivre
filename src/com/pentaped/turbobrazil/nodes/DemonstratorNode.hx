@@ -5,10 +5,10 @@ import com.pentaped.turbobrazil.components.*;
 
 class DemonstratorNode extends Node<DemonstratorNode> {
 
-	public var place 	: TargetPlace;
-	public var loops 	: Loops;
-	public var sprite	: SpriteAnimation;
-	public var gpu   	: GPUAnimation;
+	// public var place	: TargetPlace;
+	public var loops   	: Loops;
+	public var sprite  	: SpriteAnimation;
+	public var gpu     	: GPUAnimation;
 
 	public var demonstrator	: Demonstrator;
 }

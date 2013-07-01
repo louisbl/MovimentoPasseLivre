@@ -4,12 +4,14 @@ import ash.core.System;
 import ash.core.Engine;
 import ash.tools.ListIteratingSystem;
 
+import aze.display.TileClip;
 import com.roxstudio.haxe.gesture.RoxGestureAgent;
 import com.roxstudio.haxe.gesture.RoxGestureEvent;
 import de.polygonal.ds.DA;
 
 import com.pentaped.turbobrazil.core.GameData;
 import com.pentaped.turbobrazil.core.GameSession;
+import com.pentaped.turbobrazil.core.GameAssets;
 import com.pentaped.turbobrazil.nodes.MainCharNode;
 import com.pentaped.turbobrazil.components.Position2D;
 import com.pentaped.turbobrazil.components.CustomWaypoint;
@@ -29,6 +31,9 @@ class MainCharSys extends ListIteratingSystem<MainCharNode> {
 	@inject
 	public var session : GameSession;
 
+	@inject
+	public var assets : GameAssets;
+
 	var _swap : SWAP_DIR;
 
 	public function new( ) {
@@ -46,9 +51,17 @@ class MainCharSys extends ListIteratingSystem<MainCharNode> {
 
   function _onNodeAdded( node : MainCharNode ) {
 		trace( '_onNodeAdded:$node' );
-		node.sprite.sprite.addChild( new Bitmap( Assets.getBitmapData( "assets/hero.png" ) ) );
+
+		var clip = new TileClip( assets.getTileLayer( ), "hero" );
+		clip.loop = true;
+		assets.getTileLayer( ).addChild( clip );
+
+		node.gpu.clip = clip;
+
+		// node.sprite.sprite.addChild( new Bitmap( Assets.getBitmapData( "assets/hero.png" ) ) );
 		node.loops.elements.push( data.main_loops[0] );
 		node.entity.add( new TargetPlace( ) );
+		node.entity.add( new Position2D( ) );
 		trace( '${node.loops.current}' );
 	}
 

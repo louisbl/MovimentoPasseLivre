@@ -20,6 +20,9 @@ import com.pentaped.turbobrazil.core.GameData;
 class God {
 
 	@inject
+	public var assets : GameAssets;
+
+	@inject
 	public var data : GameData;
 
 	@inject
@@ -48,19 +51,22 @@ class God {
 	}
 
 	public function createPeople( ) {
-		var people = _createBaseEntity( )
+		var people = new Entity( )
 			.add( new People( ) );
+			_createBaseEntity( people );
 		engine.addEntity( people );
 	}
 
 	public function createDemonstrator( ) {
-		var demo = _createBaseEntity( )
+		var demo = new Entity( )
 			.add( new Demonstrator( ) );
+		_createBaseEntity( demo );
 		engine.addEntity( demo );
 	}
 
 	public function createGame( ) {
 		_createMap( );
+		map.addChild( assets.getTileLayer( ).view );
 		_createMainChar( );
 		_createPeoples( );
 		_createDemonstrators( );
@@ -97,12 +103,11 @@ class God {
 			var index1 = data.arcs[i++];
 			var source = waypoints.get(index0).node;
 			var target = waypoints.get(index1).node;
-
 			graph.addMutualArc(source, target, 1);
 		}
 
 		for( i in 0...6 ) {
-			var bmp = new Bitmap( Assets.getBitmapData( "assets/0"+(i+1)+".png" ) );
+			var bmp = new Bitmap( Assets.getBitmapData( "assets/0"+(i+1)+".jpg" ) );
 			bmp.x = (i%3)*2048;
 			if( i >= 3 ) {
 				bmp.y = 2048;
@@ -113,21 +118,19 @@ class God {
 	}
 
 	function _createMainChar( ) {
-		var main_char = _createBaseEntity( )
+		var main_char = new Entity( )
 			.add( new MainChar( ) );
+		_createBaseEntity( main_char );
 		engine.addEntity( main_char );
 	}
 
-	function _createBaseEntity( ) {
+	function _createBaseEntity( entity : Entity ) {
 		var sp = new Sprite( );
 		var spa = new SpriteAnimation( );
 		spa.sprite = sp;
-		return new Entity( )
-			.add( new Position2D( ) )
-			.add( new Scale2D( ) )
+		entity.add( new Scale2D( ) )
 			.add( spa )
 			.add( new Loops( ) )
-			.add( new TargetPlace( ) )
 			.add( new GPUAnimation( ) );
 	}
 

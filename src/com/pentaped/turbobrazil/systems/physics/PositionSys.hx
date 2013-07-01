@@ -17,9 +17,19 @@ class PositionSys extends ListIteratingSystem<PositionNode> {
 	}
 
 	function _updateNode( node : PositionNode, delta_time : Float ) : Void {
+		if( node.place.stopped ) {
+			Actuate.stop( node.position );
+			return;
+		}
 		if( node.place.current != null && node.place.arrived ) {
 			node.place.arrived = false;
-			Actuate.tween( node.position, 2, { x : node.place.current.x,
+			var currentAngle = node.position.rotation;
+			var angleTo = Math.atan2( node.place.current.y - node.position.y,
+			                                    node.place.current.x - node.position.x );
+			var diffAngle = Math.atan2(Math.sin(angleTo - currentAngle), Math.cos(angleTo - currentAngle));
+			angleTo = node.position.rotation + diffAngle;
+			Actuate.tween( node.position, 1, {rotation:angleTo} );
+			Actuate.tween( node.position, 3 + Math.random( ) * 3, { x : node.place.current.x,
 																				 y : node.place.current.y } )
 				.ease( motion.easing.Linear.easeNone )
 				.onComplete( _setArrived, [node] );
@@ -27,17 +37,18 @@ class PositionSys extends ListIteratingSystem<PositionNode> {
 	}
 
 	function _onNodeAdded( node : PositionNode ) {
+		trace( '_onNodeAdded:$node' );
 		if( node.place.current != null && node.place.arrived ) {
-			node.place.arrived = false;
-			Actuate.tween( node.position, 1, { x : node.place.current.x,
-																				 y : node.place.current.y } )
-				.ease( motion.easing.Linear.easeNone )
-				.delay( Std.random( 5 ) )
-				.onComplete( _setArrived, [node] );
+			node.position.x = Std.int( node.place.current.x );
+			node.position.y = Std.int( node.place.current.y );
+			haxe.Timer.delay( function( ){
+				node.place.arrived = true;
+				}, Std.random( 5000 ));
 		}
 	}
 
 	function _setArrived( node : PositionNode ) {
 		node.place.arrived = true;
 	}
+
 }

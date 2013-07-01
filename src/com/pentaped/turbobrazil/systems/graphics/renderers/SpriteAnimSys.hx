@@ -16,15 +16,21 @@ class SpriteAnimSys extends ListIteratingSystem<SpriteAnimNode> {
 
 	function _updateNode( node : SpriteAnimNode, delta_time : Float ) : Void {
 		if( node.anim.sprite != null ) {
-			node.anim.sprite.x     	= node.position.x;
-			node.anim.sprite.y     	= node.position.y;
-			node.anim.sprite.scaleX	= node.scale.x;
-			node.anim.sprite.scaleY	= node.scale.y;
+			node.anim.sprite.rotation	= node.position.rotation;
+			node.anim.sprite.x       	= node.position.x - node.anim.sprite.width / 2;
+			node.anim.sprite.y       	= node.position.y - node.anim.sprite.height / 2;
+			node.anim.sprite.scaleX  	= node.scale.x;
+			node.anim.sprite.scaleY  	= node.scale.y;
 		}
 	}
 
 	function _onNodeAdded( node : SpriteAnimNode ) : Void {
 		map.addChild( node.anim.sprite );
+	}
+
+
+	function _onNodeRemoved( node : SpriteAnimNode ) : Void {
+		map.removeChild( node.anim.sprite );
 	}
 
 }

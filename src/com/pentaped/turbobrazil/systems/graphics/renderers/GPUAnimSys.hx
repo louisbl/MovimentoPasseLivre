@@ -12,10 +12,11 @@ class GPUAnimSys extends ListIteratingSystem<GPUAnimNode> {
 
 	function _updateNode( node : GPUAnimNode, delta_time : Float ) : Void {
 		if( node.anim.clip != null ) {
-			node.anim.clip.x     	= node.position.x;
-			node.anim.clip.y     	= node.position.y;
-			node.anim.clip.scaleX	= node.scale.x;
-			node.anim.clip.scaleY	= node.scale.y;
+			node.anim.clip.rotation	= node.position.rotation;
+			node.anim.clip.x       	= node.position.x;
+			node.anim.clip.y       	= node.position.y;
+			node.anim.clip.scaleX  	= node.scale.x;
+			node.anim.clip.scaleY  	= node.scale.y;
 		}
 	}
 

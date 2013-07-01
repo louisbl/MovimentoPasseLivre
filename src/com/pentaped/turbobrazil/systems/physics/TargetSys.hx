@@ -33,18 +33,29 @@ class TargetSys extends ListIteratingSystem<TargetNode> {
 			if( node.place.reset ) {
 				_fillWaypoints( node );
 				node.place.reset = false;
-			}
-			node.place.index++;
-			if( node.place.current == null ) {
-				node.place.index = 0;
+			} else {
+				node.place.index++;
+				_resetLoop( node );
 			}
 		}
 	}
 
   function _onNodeAdded( node : TargetNode ) {
-		trace( '_onNodeAdded:$node' );
+		// trace( '_onNodeAdded:$node' );
 		// TODO: Add specific targets
 		// _fillWaypoints( node );
+		_resetLoop( node );
+	}
+
+	function _resetLoop( node : TargetNode ) {
+		if( node.place.current == null ) {
+				node.place.elements = [];
+				for( p in node.loops.current ) {
+					var wp = waypoints.get( p );
+					node.place.elements.push( wp );
+				}
+				node.place.index = 0;
+			}
 	}
 
 	function _fillWaypoints( node : TargetNode ) {
@@ -52,8 +63,8 @@ class TargetSys extends ListIteratingSystem<TargetNode> {
 		var path = _getPath( node.place.current, wp );
 
 		node.place.elements = [];
-		trace( '${node.loops.index}');
-		trace( '${node.loops.elements}');
+		// trace( '${node.loops.index}');
+		// trace( '${node.loops.elements}');
 
 		for( wp in path ) {
 			node.place.elements.push( wp );
@@ -61,7 +72,7 @@ class TargetSys extends ListIteratingSystem<TargetNode> {
 
 		for( p in node.loops.current ) {
 			wp = waypoints.get( p );
-			// trace( 'wp:$wp' );
+			// // trace( 'wp:$wp' );
 			// var pos = new Position2D( );
 			// pos.x = Std.int( wp.x );
 			// pos.y = Std.int( wp.y );
@@ -75,8 +86,8 @@ class TargetSys extends ListIteratingSystem<TargetNode> {
 			return path;
 		}
 		var pathExists = astar.find(graph, source, target, path);
-		trace('path exists: ' + pathExists);
-		if (pathExists) trace('waypoints : ' + path);
+		// trace('path exists: ' + pathExists);
+		// if (pathExists) trace('waypoints : ' + path);
 
 		return path;
 

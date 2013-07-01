@@ -10,6 +10,7 @@ class Position2D implements Poolable {
 	public var coord( get, null )	: Array2Cell;
 	public var x                 	: Int;
 	public var y                 	: Int;
+	public var rotation          	: Float;
 
 	var _point : Point;
 	var _coord : Array2Cell;
@@ -21,6 +22,7 @@ class Position2D implements Poolable {
 	public function reset( ) : Void {
 		x = 0;
 		y = 0;
+		rotation = 0;
 	}
 
 	function get_point( ) : Point {
